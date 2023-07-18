@@ -1,7 +1,27 @@
 <script lang="ts" setup>
-import {effectScope, onMounted, ref, watch, watchEffect} from "vue";
+import {effectScope, onMounted, ref, watch} from "vue";
 import {useEventListener} from "@vueuse/core";
+import {WatchSource} from "@vue/runtime-core";
 
+
+function addHighlight(el: HTMLElement) {
+  el.dataset.originalOutline = el.style.outline
+  el.style.outline = 'highlight solid 4px';
+}
+
+function clearHighlight(el) {
+  el.style.outline = el.dataset.originalOutline || '';
+}
+
+function useHighlightOnElement(element: WatchSource<HTMLElement>) {
+  return watch(element, (el, prevEl) => {
+    if (prevEl) {
+      clearHighlight(prevEl)
+    }
+
+    addHighlight(el)
+  })
+}
 
 const selected = ref<HTMLElement | null>(null)
 
@@ -12,23 +32,8 @@ function onSelect() {
   scope.run(() => {
     const hoveredElement = ref<HTMLElement>()
 
-    function addHighlight(el: HTMLElement) {
-      el.dataset.originalOutline = el.style.outline
-      el.style.outline = 'highlight solid 4px';
-    }
 
-    function clearHighlight(el) {
-      el.style.outline = el.dataset.originalOutline || '';
-    }
-
-    watch(hoveredElement, (el, prevEl) => {
-      console.log({prevEl})
-      if (prevEl) {
-        clearHighlight(prevEl)
-      }
-
-      addHighlight(el)
-    })
+    useHighlightOnElement(hoveredElement)
 
     function updateHoveredElement(e: MouseEvent) {
       if (!e.target || !(e.target instanceof HTMLElement)) {
@@ -61,7 +66,7 @@ function onSelect() {
 
 onMounted(onSelect)
 
-watchEffect(() => console.log(selected.value))
+useHighlightOnElement(selected)
 </script>
 
 <template>
