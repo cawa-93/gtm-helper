@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/chrome": "^0.0.241",
     "@vitejs/plugin-vue": "^4.2.3",
-    "vite": "^4.4.0",
+    "vite": "^4.4.4",
     "web-ext": "^7.6.2"
   }
 }
