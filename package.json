@@ -1,0 +1,26 @@
+{
+  "name": "web-extension-custom-element-test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch --mode development --minify false",
+    "build": "vite build --mode development --minify false",
+    "start:edge": "web-ext run -t chromium --chromium-binary \"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
+    "start:firefox": "web-ext run -f --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@samrum/vite-plugin-web-extension": "^5.0.0",
+    "@unplugin-vue-ce/sub-style": "1.0.0-beta.9",
+    "@vueuse/core": "^10.2.1",
+    "@webcomponents/custom-elements": "^1.6.0",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.241",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vite": "^4.4.0",
+    "web-ext": "^7.6.2"
+  }
+}
