@@ -1,27 +1,10 @@
 <script lang="ts" setup>
-import {effectScope, onMounted, ref, watch} from "vue";
+import {effectScope, getCurrentInstance, onBeforeUnmount, onMounted, onUnmounted, ref} from "vue";
 import {useEventListener} from "@vueuse/core";
-import {WatchSource} from "@vue/runtime-core";
+import {useHighlightOnElement} from "./components/UseHighlightOnElement";
+import WidgetWindow from "./components/WidgetWindow.vue";
+import WidgetControls from "./components/WIdgetControls.vue";
 
-
-function addHighlight(el: HTMLElement) {
-  el.dataset.originalOutline = el.style.outline
-  el.style.outline = 'highlight solid 4px';
-}
-
-function clearHighlight(el) {
-  el.style.outline = el.dataset.originalOutline || '';
-}
-
-function useHighlightOnElement(element: WatchSource<HTMLElement>) {
-  return watch(element, (el, prevEl) => {
-    if (prevEl) {
-      clearHighlight(prevEl)
-    }
-
-    addHighlight(el)
-  })
-}
 
 const selected = ref<HTMLElement | null>(null)
 
@@ -50,7 +33,6 @@ function onSelect() {
         event.stopPropagation()
         event.stopImmediatePropagation()
         selected.value = hoveredElement.value
-        clearHighlight(hoveredElement.value)
         console.log('STOP')
         scope.stop()
       }
@@ -66,13 +48,32 @@ function onSelect() {
 
 onMounted(onSelect)
 
+onBeforeUnmount(() => console.log('onBeforeUnmount'))
+onUnmounted(() => console.log('onUnmounted'))
+
 useHighlightOnElement(selected)
+
+
+const closeApp = () => {
+  document.querySelector('gtm-helper')?.remove()
+}
 </script>
 
 <template>
   <section id="app-root">
+    <WidgetWindow v-if="selected">
+      <template #header>
+        <WidgetControls @close="closeApp" @selectNewElement="onSelect"/>
+      </template>
+    </WidgetWindow>
   </section>
 </template>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+</style>
 
 <style scoped>
 #app-root {

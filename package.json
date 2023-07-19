@@ -18,6 +18,7 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@iconify-prerendered/vue-ic": "^0.22.1672653513",
     "@types/chrome": "^0.0.241",
     "@vitejs/plugin-vue": "^4.2.3",
     "vite": "^4.4.4",
