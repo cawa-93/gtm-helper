@@ -43,14 +43,7 @@ const {x, y, style} = useDraggable(handle, {
       <slot name="header"></slot>
     </header>
     <main>
-      <pre>
-        style:{{ style }}
-
-        x:{{ x }}
-        y:{{ y }}
-
-        attachedStyles: {{ style }}
-      </pre>
+      <slot></slot>
     </main>
   </section>
 </template>

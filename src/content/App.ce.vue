@@ -4,12 +4,14 @@ import {useEventListener} from "@vueuse/core";
 import {useHighlightOnElement} from "./components/UseHighlightOnElement";
 import WidgetWindow from "./components/WidgetWindow.vue";
 import WidgetControls from "./components/WIdgetControls.vue";
+import WidgetProposals from "./components/WidgetProposals.vue";
 
 
 const selected = ref<HTMLElement | null>(null)
 
 
 function onSelect() {
+  selected.value = null
   const scope = effectScope()
 
   scope.run(() => {
@@ -61,10 +63,13 @@ const closeApp = () => {
 
 <template>
   <section id="app-root">
-    <WidgetWindow v-if="selected">
+    <WidgetWindow>
       <template #header>
         <WidgetControls @close="closeApp" @selectNewElement="onSelect"/>
       </template>
+
+      <WidgetProposals v-if="selected" :element="selected"/>
+      <div v-else>Оберіть елемент на сторінці для аналізу</div>
     </WidgetWindow>
   </section>
 </template>
