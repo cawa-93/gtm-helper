@@ -19,8 +19,11 @@ export default defineConfig({
                 description: 'pkg.description',
                 version: '0.0.1',
                 manifest_version: 3,
-
                 default_locale: 'en',
+                icons: {
+                    "128": "icons/128.png"
+                },
+
 
                 action: {},
 
