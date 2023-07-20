@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {useDraggable} from "@vueuse/core";
-import {computed, onMounted, ref} from "vue";
+import {ref} from "vue";
 
 const draggingElement = ref<HTMLElement | null>(null)
 const handle = ref<HTMLElement | null>(null)
@@ -67,8 +67,7 @@ section {
 
 header {
   cursor: move;
-  min-height: 50px;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--border-color);
   user-select: none;
   touch-action: none;

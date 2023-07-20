@@ -1,5 +1,3 @@
-import {Proposal} from "../gtm-proposals/Proposal.js";
-import {SelectorType, TriggerType} from "./contracts.js";
 import {isClickable} from "../utils/isClickable.js";
 import {ClickProposal} from "../gtm-proposals/ClickProposal.js";
 import {VisibilityProposal} from "../gtm-proposals/VisibilityProposal.js";

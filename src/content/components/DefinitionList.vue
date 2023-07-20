@@ -18,7 +18,7 @@ defineProps<{
 </template>
 
 <style scoped>
-dl {
+dl, dd {
   margin: 0;
 }
 

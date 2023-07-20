@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import {IconMouse, IconEye, IconLink, IconPlaylistCheck} from '@iconify-prerendered/vue-mdi'
-import {Proposal} from "../gtm-proposals/Proposal.js";
+import {IconEye, IconLink, IconMouse, IconPlaylistCheck} from '@iconify-prerendered/vue-mdi'
 import {ClickLinkProposal} from "../gtm-proposals/ClickLinkProposal.js";
 import {VisibilityProposal} from "../gtm-proposals/VisibilityProposal.js";
 import {FormProposal} from "../gtm-proposals/FormProposal.js";
 import {ClickProposal} from "../gtm-proposals/ClickProposal.js";
 import {computed} from "vue";
-import DefitionList from "./DefitionList.vue";
+import DefinitionList from "./DefinitionList.vue";
 
 const props = defineProps<{
   proposal: VisibilityProposal | ClickLinkProposal | ClickProposal | FormProposal
@@ -34,7 +33,7 @@ const icon = computed(() => {
       {{ icon.label }}
     </summary>
     <div class="inner-content">
-      <DefitionList :definitions="definitions"/>
+      <DefinitionList :definitions="definitions"/>
     </div>
   </details>
 </template>

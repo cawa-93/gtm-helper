@@ -1,14 +1,15 @@
 <script lang="ts" setup>
-import {effectScope, getCurrentInstance, onBeforeUnmount, onMounted, onUnmounted, ref} from "vue";
+import {effectScope, onBeforeUnmount, onMounted, onUnmounted, ref} from "vue";
 import {useEventListener} from "@vueuse/core";
 import {useHighlightOnElement} from "./composables/UseHighlightOnElement.js";
 import WidgetWindow from "./components/WidgetWindow.vue";
 import WidgetControls from "./components/WIdgetControls.vue";
 import WidgetProposals from "./components/WidgetProposals.vue";
-
+import MessageNonInteractive from "./components/MessageNonInteractive.vue";
+import MessageInForm from "./components/MessageInForm.vue";
+import MessageFormSubmit from "./components/MessageFormSubmit.vue";
 
 const selected = ref<HTMLElement | null>(null)
-
 
 function onSelect() {
   selected.value = null
@@ -55,24 +56,34 @@ onUnmounted(() => console.log('onUnmounted'))
 
 useHighlightOnElement(selected)
 
-
+/**
+ * Element inside shadow root
+ */
+const root = ref<HTMLElement>()
 const closeApp = () => {
-  document.querySelector('gtm-helper')?.remove()
+  // @ts-ignore
+  root.value.getRootNode().host.remove()
 }
 </script>
 
 <template>
-  <section id="app-root">
+  <section id="app-root" ref="root">
     <WidgetWindow>
       <template #header>
         <WidgetControls @close="closeApp" @selectNewElement="onSelect"/>
       </template>
 
-      <WidgetProposals v-if="selected" :element="selected"/>
-      <div v-else>Оберіть елемент на сторінці для аналізу</div>
+      <div class="main-content">
+        <MessageFormSubmit v-if="selected" v-model:element="selected"/>
+        <MessageInForm v-if="selected" v-model:element="selected"/>
+        <MessageNonInteractive v-if="selected" v-model:element="selected"/>
+        <WidgetProposals v-if="selected" :element="selected"/>
+        <div v-else>Оберіть елемент на сторінці для аналізу</div>
+      </div>
     </WidgetWindow>
   </section>
 </template>
+
 
 <style>
 * {
@@ -90,5 +101,11 @@ const closeApp = () => {
   height: 100%;
   width: 100%;
   pointer-events: none;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 </style>

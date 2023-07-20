@@ -1,7 +1,6 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {ref, watch} from "vue";
 import {useEventListener} from '@vueuse/core'
-import HighlightElement from "./HighlightElement.vue";
 
 const emit = defineEmits<{
   'select': [element: HTMLElement]

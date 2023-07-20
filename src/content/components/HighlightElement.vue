@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {computed} from "vue";
 
 const props = defineProps<{
@@ -23,7 +23,7 @@ const highlightRect = computed(() => {
 
 
 <template>
-  <div class="rectangle" :style="highlightRect"></div>
+  <div :style="highlightRect" class="rectangle"></div>
 </template>
 
 <style scoped>

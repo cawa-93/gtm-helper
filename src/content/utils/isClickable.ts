@@ -25,5 +25,9 @@ export function isClickable(element: HTMLElement): boolean {
         return true
     }
 
+    if (element instanceof HTMLLabelElement) {
+        return element.hasAttribute('for') || !!element.querySelector('input, textarea, select')
+    }
+
     return element.tabIndex >= 0
 }

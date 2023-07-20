@@ -1,8 +1,8 @@
-import {computed, MaybeRef, toValue} from "vue";
+import {computed, MaybeRefOrGetter, toValue} from "vue";
 import {Proposal} from "../gtm-proposals/Proposal.js";
 import {
-    getClickProposals,
     getClickLinkProposals,
+    getClickProposals,
     getFormProposals,
     getVisibleProposals
 } from "../gtm-trigger-strategies/bySelector.js";
@@ -14,6 +14,8 @@ const strategies: ((element: HTMLElement) => Proposal[])[] = [
     getVisibleProposals,
 ];
 
-export function useProposals(element: MaybeRef<HTMLElement>) {
-    return computed(() => strategies.flatMap(s => s(toValue(element))))
+export function useProposals(element: MaybeRefOrGetter<HTMLElement>) {
+    return computed(() => {
+        return strategies.flatMap(s => s(toValue(element)));
+    })
 }

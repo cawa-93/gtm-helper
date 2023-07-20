@@ -3,16 +3,13 @@ import {useProposals} from "../composables/useProposals.js";
 import ProposalDetails from "./ProposalDetails.vue";
 import {computed} from "vue";
 import {VisibilityProposal} from "../gtm-proposals/VisibilityProposal.js";
-import {IconEye, IconLink, IconMouse, IconPlaylistCheck} from "@iconify-prerendered/vue-mdi";
-import {ClickLinkProposal} from "../gtm-proposals/ClickLinkProposal.js";
-import {ClickProposal} from "../gtm-proposals/ClickProposal.js";
 import {FormProposal} from "../gtm-proposals/FormProposal.js";
 
 const props = defineProps<{
   element: HTMLElement
 }>()
 
-const proposals = useProposals(props.element)
+const proposals = useProposals(() => props.element)
 
 type Definition = { title: string, value: string }
 

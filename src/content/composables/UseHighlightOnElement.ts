@@ -6,7 +6,7 @@ function addHighlight(el: HTMLElement | null | undefined) {
         return
     }
     el.dataset.originalOutline = el.style.outline || '';
-    el.style.outline = 'highlight solid 4px';
+    el.style.outline = 'highlight solid 5px';
 }
 
 export function clearHighlight(el: HTMLElement | null | undefined) {
@@ -14,6 +14,7 @@ export function clearHighlight(el: HTMLElement | null | undefined) {
         return
     }
     el.style.outline = el.dataset.originalOutline || '';
+    delete el.dataset.originalOutline
 }
 
 export function useHighlightOnElement(element: WatchSource<HTMLElement | undefined | null>) {

@@ -4,8 +4,15 @@
     "target": "ESNext",
     "strict": true,
     "sourceMap": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "types": [
-      "chrome"
+      "chrome",
+      "vite/client"
     ]
   },
   "exclude": [

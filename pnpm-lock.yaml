@@ -22,9 +22,6 @@ dependencies:
     version: 3.3.4
 
 devDependencies:
-  '@iconify-prerendered/vue-ic':
-    specifier: ^0.22.1672653513
-    version: 0.22.1672653513(vue@3.3.4)
   '@iconify-prerendered/vue-mdi':
     specifier: ^0.22.1678433397
     version: 0.22.1678433397(vue@3.3.4)
@@ -403,14 +400,6 @@ packages:
 
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
-    dev: true
-
-  /@iconify-prerendered/vue-ic@0.22.1672653513(vue@3.3.4):
-    resolution: {integrity: sha512-r1OmHfjVLwzV+7+UYxsk1GYLypcTnKJUTnKMWLyoqj39RJOrkeKrh3VwBIlPiHUCnhICn8PXV/Au6lYusCG6Rw==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      vue: 3.3.4
     dev: true
 
   /@iconify-prerendered/vue-mdi@0.22.1678433397(vue@3.3.4):
