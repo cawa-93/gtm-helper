@@ -25,12 +25,18 @@ devDependencies:
   '@iconify-prerendered/vue-ic':
     specifier: ^0.22.1672653513
     version: 0.22.1672653513(vue@3.3.4)
+  '@iconify-prerendered/vue-mdi':
+    specifier: ^0.22.1678433397
+    version: 0.22.1678433397(vue@3.3.4)
   '@types/chrome':
     specifier: ^0.0.241
     version: 0.0.241
   '@vitejs/plugin-vue':
     specifier: ^4.2.3
     version: 4.2.3(vite@4.4.4)(vue@3.3.4)
+  typescript:
+    specifier: ^5.1.6
+    version: 5.1.6
   vite:
     specifier: ^4.4.4
     version: 4.4.4
@@ -401,6 +407,14 @@ packages:
 
   /@iconify-prerendered/vue-ic@0.22.1672653513(vue@3.3.4):
     resolution: {integrity: sha512-r1OmHfjVLwzV+7+UYxsk1GYLypcTnKJUTnKMWLyoqj39RJOrkeKrh3VwBIlPiHUCnhICn8PXV/Au6lYusCG6Rw==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.3.4
+    dev: true
+
+  /@iconify-prerendered/vue-mdi@0.22.1678433397(vue@3.3.4):
+    resolution: {integrity: sha512-idptidWI+TYQD2744vJZox6IiG91ZtURPHc64umHdHKxKTedw2nLKqW9v+4Vg5tDSl75mehJnSxnWgjdLoiaXA==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
@@ -3500,6 +3514,12 @@ packages:
 
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
+    dev: true
+
+  /typescript@5.1.6:
+    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
+    engines: {node: '>=14.17'}
+    hasBin: true
     dev: true
 
   /unique-string@3.0.0:

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {effectScope, getCurrentInstance, onBeforeUnmount, onMounted, onUnmounted, ref} from "vue";
 import {useEventListener} from "@vueuse/core";
-import {useHighlightOnElement} from "./components/UseHighlightOnElement";
+import {useHighlightOnElement} from "./composables/UseHighlightOnElement.js";
 import WidgetWindow from "./components/WidgetWindow.vue";
 import WidgetControls from "./components/WIdgetControls.vue";
 import WidgetProposals from "./components/WidgetProposals.vue";
@@ -82,6 +82,7 @@ const closeApp = () => {
 
 <style scoped>
 #app-root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   position: absolute;
   z-index: 99999999;
   top: 0;

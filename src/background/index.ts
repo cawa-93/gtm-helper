@@ -19,7 +19,7 @@ function startIfNotStarted() {
     }
 
     document.documentElement.style.position = 'relative'
-    document.documentElement.appendChild(new (customElements.get('gtm-helper'))())
+    document.documentElement.appendChild(new (customElements.get('gtm-helper')!)())
 }
 
 chrome.action.onClicked.addListener(async (tab) => {

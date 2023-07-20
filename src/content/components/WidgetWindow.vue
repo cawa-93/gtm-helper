@@ -59,7 +59,7 @@ section {
   width: 100%;
   max-height: 100%;
   border-radius: 0.5rem;
-  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
   --border-color: #dee2e6;
   border: 1px solid var(--border-color);
