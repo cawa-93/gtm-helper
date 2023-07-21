@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite build --watch --mode development --minify false",
-    "build": "vite build",
+    "build": "vite build --mode development --minify false",
     "start:edge": "web-ext run -t chromium --chromium-binary \"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
     "start:firefox": "web-ext run -f --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
     "preview": "vite preview",

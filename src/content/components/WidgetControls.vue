@@ -1,30 +1,57 @@
 <script lang="ts" setup>
 import {IconClose, IconSearch} from '@iconify-prerendered/vue-mdi'
 
+import {getMessage} from 'virtual:i18n'
+
+
 defineEmits<{
   selectNewElement: [],
   close: []
 }>()
 
-const useI18n = chrome.i18n.getMessage
 </script>
 
 <template>
   <div class="controls">
     <div class="controls-group">
-      <button :title="useI18n('select_element')" type="button"
+      <button :title="getMessage('select_element')" type="button"
               @click.prevent="$emit('selectNewElement')">
         <IconSearch/>
       </button>
     </div>
     <div class="controls-group">
-      <button title="Завершити роботу" type="button" @click.prevent="$emit('close')">
+      <button :title="getMessage('close_app')" type="button" @click.prevent="$emit('close')">
         <IconClose/>
       </button>
     </div>
   </div>
 </template>
 
+
+<chrome-i18n lang="json" locale="uk">
+{
+"$schema": "https://json.schemastore.org/browser.i18n.json",
+"select_element": {
+"message": "Обрати новий елемент для аналізу"
+},
+"close_app": {
+"message":"Завершити роботу"
+}
+}
+</chrome-i18n>
+
+
+<chrome-i18n lang="json" locale="en">
+{
+"$schema": "https://json.schemastore.org/browser.i18n.json",
+"select_element": {
+"message": "Select new element for analyze"
+},
+"close_app": {
+"message":"Close app"
+}
+}
+</chrome-i18n>
 
 <style scoped>
 .controls {

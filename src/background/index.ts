@@ -1,4 +1,4 @@
-const chrome = globalThis.browser || globalThis.chrome;
+// const chrome = globalThis.browser || globalThis.chrome;
 
 
 /**
@@ -24,6 +24,10 @@ function startIfNotStarted() {
 
 chrome.action.onClicked.addListener(async (tab) => {
 
+    if (!tab.id) {
+        return
+    }
+    
     const result = await chrome.scripting.executeScript({target: {tabId: tab.id}, func: isInit})
 
     if (!result[0].result) {
