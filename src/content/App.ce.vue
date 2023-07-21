@@ -8,6 +8,7 @@ import WidgetProposals from "./components/WidgetProposals.vue";
 import MessageNonInteractive from "./components/MessageNonInteractive.vue";
 import MessageInForm from "./components/MessageInForm.vue";
 import MessageFormSubmit from "./components/MessageFormSubmit.vue";
+import WidgetFooter from "./components/WidgetFooter.vue";
 
 const selected = ref<HTMLElement | null>(null)
 
@@ -30,13 +31,11 @@ function onSelect() {
     }
 
     function handleClick(event: Event) {
-      console.log('CLICK')
       if (hoveredElement.value && hoveredElement.value instanceof HTMLElement) {
         event.preventDefault()
         event.stopPropagation()
         event.stopImmediatePropagation()
         selected.value = hoveredElement.value
-        console.log('STOP')
         scope.stop()
       }
     }
@@ -80,6 +79,9 @@ const closeApp = () => {
         <WidgetProposals v-if="selected" :element="selected"/>
         <div v-else>Оберіть елемент на сторінці для аналізу</div>
       </div>
+      <template #footer>
+        <WidgetFooter/>
+      </template>
     </WidgetWindow>
   </section>
 </template>

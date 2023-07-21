@@ -39,5 +39,6 @@ export default defineConfig({
             additionalInputs: {
                 scripts: ['src/content/main.ts']
             }
-        }),],
+        }),
+    ],
 })

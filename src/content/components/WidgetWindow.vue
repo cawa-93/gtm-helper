@@ -45,6 +45,9 @@ const {x, y, style} = useDraggable(handle, {
     <main>
       <slot></slot>
     </main>
+    <footer>
+      <slot name="footer"></slot>
+    </footer>
   </section>
 </template>
 
@@ -79,5 +82,14 @@ main {
   overflow: auto;
 }
 
+footer {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 80%;
+}
+
+footer:not(:hover):not(:focus-visible) {
+  opacity: 0.5;
+}
 
 </style>
