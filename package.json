@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite build --watch --mode development --minify false",
-    "build": "vite build --mode development --minify false",
+    "build": "vite build",
     "start:edge": "web-ext run -t chromium --chromium-binary \"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
     "start:firefox": "web-ext run -f --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "npx playwright test"
   },
   "dependencies": {
     "@samrum/vite-plugin-web-extension": "^5.0.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@iconify-prerendered/vue-mdi": "^0.22.1678433397",
+    "@playwright/test": "^1.36.1",
     "@types/chrome": "^0.0.241",
     "@vitejs/plugin-vue": "^4.2.3",
     "typescript": "^5.1.6",
