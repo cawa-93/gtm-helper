@@ -3,6 +3,7 @@ import {computed} from "vue";
 import {isClickable} from "../utils/isClickable.js";
 import LinkLikeButton from "./LinkLikeButton.vue";
 import ColoredAlert from "./ColoredAlert.vue";
+import {getMessage} from "vite-plugin-vue-chrome-i18n/getMessage.js";
 
 const element = defineModel<HTMLElement>('element', {
   required: true
@@ -28,16 +29,39 @@ const interactiveParent = computed(() => {
 
 <template>
   <ColoredAlert v-if="isSelectedElementNonInteractive" style="--hue: 92">
-    Обраний вами елемент є не інтерактивним.
-    <span v-if="interactiveParent">
-      Але у нього є інтерактивна обгортка.
-      <LinkLikeButton @click="element = interactiveParent">
-        Перемкнутись
-      </LinkLikeButton>
-    </span>
+    {{ getMessage('notice') }}.
+    <LinkLikeButton v-if="interactiveParent" @click="element = interactiveParent">
+      {{ getMessage('action') }}
+    </LinkLikeButton>
   </ColoredAlert>
 </template>
 
-<style scoped>
 
-</style>
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="uk">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "notice": {
+    "message": "Вибраний елемент, ймовірно, не є клікабельним"
+  },
+  "action": {
+    "message": "Перемкнутись на клікабельну обгортку"
+  }
+}
+</chrome-i18n>
+
+
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="en">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "notice": {
+    "message": "Selected element, probably, is not clickable"
+  },
+  "action": {
+    "message": "Switch to clickable wrapper"
+  }
+}
+</chrome-i18n>

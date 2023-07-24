@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {IconClose, IconSearch} from '@iconify-prerendered/vue-mdi'
 
-import {getMessage} from 'virtual:i18n'
+import {getMessage} from 'vite-plugin-vue-chrome-i18n/getMessage.js'
 
 
 defineEmits<{
@@ -28,30 +28,35 @@ defineEmits<{
 </template>
 
 
-<chrome-i18n lang="json" locale="uk">
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="uk">
 {
-"$schema": "https://json.schemastore.org/browser.i18n.json",
-"select_element": {
-"message": "Обрати новий елемент для аналізу"
-},
-"close_app": {
-"message":"Завершити роботу"
-}
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "select_element": {
+    "message": "Обрати новий елемент для аналізу"
+  },
+  "close_app": {
+    "message": "Завершити роботу"
+  }
 }
 </chrome-i18n>
 
 
-<chrome-i18n lang="json" locale="en">
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="en">
 {
-"$schema": "https://json.schemastore.org/browser.i18n.json",
-"select_element": {
-"message": "Select new element for analyze"
-},
-"close_app": {
-"message":"Close app"
-}
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "select_element": {
+    "message": "Select new element for analyze"
+  },
+  "close_app": {
+    "message": "Close app"
+  }
 }
 </chrome-i18n>
+
 
 <style scoped>
 .controls {

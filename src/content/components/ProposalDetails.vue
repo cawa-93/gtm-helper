@@ -6,6 +6,7 @@ import {FormProposal} from "../gtm-proposals/FormProposal.js";
 import {ClickProposal} from "../gtm-proposals/ClickProposal.js";
 import {computed} from "vue";
 import DefinitionList from "./DefinitionList.vue";
+import {getMessage} from "vite-plugin-vue-chrome-i18n/getMessage.js";
 
 const props = defineProps<{
   proposal: VisibilityProposal | ClickLinkProposal | ClickProposal | FormProposal
@@ -15,13 +16,13 @@ const props = defineProps<{
 const icon = computed(() => {
   switch (props.proposal.constructor) {
     case VisibilityProposal :
-      return {color: '#8bc34a', component: IconEye, label: 'Element Visibility'}
+      return {color: '#8bc34a', component: IconEye, label: getMessage('element_visibility')}
     case ClickLinkProposal :
-      return {color: '#29b6f6', component: IconLink, label: 'Click Just links'}
+      return {color: '#29b6f6', component: IconLink, label: getMessage('click_links')}
     case ClickProposal :
-      return {color: '#29b6f6', component: IconMouse, label: 'Click All elements'}
+      return {color: '#29b6f6', component: IconMouse, label: getMessage('click')}
     case FormProposal :
-      return {color: '#8bc34a', component: IconPlaylistCheck, label: 'Form Submission'}
+      return {color: '#8bc34a', component: IconPlaylistCheck, label: getMessage('form_submission')}
   }
 })
 </script>
@@ -37,6 +38,55 @@ const icon = computed(() => {
     </div>
   </details>
 </template>
+
+
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="uk">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "element_visibility": {
+    "message": "Видимість елемента"
+  },
+  "click_links": {
+    "message": "Клік: лише посилання"
+  },
+  "click": {
+    "message": "Клік: усі елементи"
+  },
+  "form_submission": {
+    "message": "Надсилання форми"
+  },
+  "video": {
+    "message": "Відео YouTube"
+  }
+}
+</chrome-i18n>
+
+
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="en">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "element_visibility": {
+    "message": "Element Visibility"
+  },
+  "click_links": {
+    "message": "Click: Just Links"
+  },
+  "click": {
+    "message": "Click: All Elements"
+  },
+  "form_submission": {
+    "message": "Form Submission"
+  },
+  "video": {
+    "message": "YouTube Video"
+  }
+}
+</chrome-i18n>
+
 
 <style scoped>
 

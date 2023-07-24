@@ -86,6 +86,28 @@ const closeApp = () => {
   </section>
 </template>
 
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="uk">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "select": {
+    "message": "Оберіть елемент на сторінці для аналізу"
+  }
+}
+</chrome-i18n>
+
+
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="uk">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "select": {
+    "message": "Select element on page to analyze"
+  }
+}
+</chrome-i18n>
 
 <style>
 * {

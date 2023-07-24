@@ -40,6 +40,9 @@ devDependencies:
   vite:
     specifier: ^4.4.4
     version: 4.4.4
+  vite-plugin-vue-chrome-i18n:
+    specifier: ^0.0.4
+    version: 0.0.4
   web-ext:
     specifier: ^7.6.2
     version: 7.6.2
@@ -3609,6 +3612,10 @@ packages:
       assert-plus: 1.0.0
       core-util-is: 1.0.2
       extsprintf: 1.3.0
+    dev: true
+
+  /vite-plugin-vue-chrome-i18n@0.0.4:
+    resolution: {integrity: sha512-GVFNP83a2KeuZ4kZKWS4O9jv0HllVT7KElLT3QlieBtKIDzBnY9HhnpkuZ4x5/o90NVLTH7tWq71UuTp5Sn8Tg==}
     dev: true
 
   /vite@4.4.4:

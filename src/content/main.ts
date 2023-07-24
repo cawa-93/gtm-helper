@@ -11,5 +11,3 @@ const AppElement = defineCustomElement(App);
 if (customElements.get(ELEMENT_NAME) === undefined) {
     customElements.define(ELEMENT_NAME, AppElement)
 }
-
-

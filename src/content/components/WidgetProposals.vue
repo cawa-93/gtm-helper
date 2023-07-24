@@ -4,6 +4,7 @@ import ProposalDetails from "./ProposalDetails.vue";
 import {computed} from "vue";
 import {VisibilityProposal} from "../gtm-proposals/VisibilityProposal.js";
 import {FormProposal} from "../gtm-proposals/FormProposal.js";
+import {getMessage} from "vite-plugin-vue-chrome-i18n/getMessage.js";
 
 const props = defineProps<{
   element: HTMLElement
@@ -17,16 +18,16 @@ const proposalsDefinitions = computed(() => proposals.value.map((proposal): Defi
   switch (proposal.constructor) {
     case VisibilityProposal :
       return [
-        {title: 'Selection Method', value: 'CSS Selector'},
-        {title: 'Element Selector ', value: proposal.selectorValue},
+        {title: getMessage('selection_method'), value: getMessage('css_selector')},
+        {title: getMessage('element_selector'), value: proposal.selectorValue},
       ]
     case FormProposal :
       return [
-        {title: 'Form Elements > Match CSS Selector', value: proposal.selectorValue}
+        {title: `Form Elements > ${getMessage('match_css_selector')}`, value: proposal.selectorValue}
       ]
     default :
       return [
-        {title: 'Click Elements > Match CSS Selector', value: proposal.selectorValue}
+        {title: `Click Elements > ${getMessage('match_css_selector')}`, value: proposal.selectorValue}
       ]
   }
 }))
@@ -42,10 +43,64 @@ const proposalsDefinitions = computed(() => proposals.value.map((proposal): Defi
           :proposal="proposal"/>
     </template>
     <div v-else>
-      Нажаль, для вибраного елементу не вдалось знайти жодних пропозицій
+      {{ getMessage('no_proposals') }}
     </div>
   </section>
 </template>
+
+
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="uk">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "no_proposals": {
+    "message": "На жаль, для вибраного елементу не вдалось знайти жодних пропозицій"
+  },
+  "match_css_selector": {
+    "message": "відповідає вибору CSS"
+  },
+  "selection_method": {
+    "message": "Спосіб вибору",
+    "description": "Тексти з налаштувань тригера «Видимість елемента»"
+  },
+  "css_selector": {
+    "message": "Селектор CSS",
+    "description": "Тексти з налаштувань тригера «Видимість елемента»"
+  },
+  "element_selector": {
+    "message": "Засіб вибору елементів",
+    "description": "Тексти з налаштувань тригера «Видимість елемента»"
+  }
+}
+</chrome-i18n>
+
+
+<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
+<!-- language=json -->
+<chrome-i18n locale="en">
+{
+  "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "no_proposals": {
+    "message": "Unfortunately, no proposals could be found for the selected element"
+  },
+  "match_css_selector": {
+    "message": "matches CSS selector"
+  },
+  "selection_method": {
+    "message": "Selection Method",
+    "description": "Texts from the «Element visibility» trigger settings"
+  },
+  "css_selector": {
+    "message": "CSS Selector",
+    "description": "Texts from the «Element visibility» trigger settings"
+  },
+  "element_selector": {
+    "message": "Element Selector ",
+    "description": "Texts from the «Element visibility» trigger settings"
+  }
+}
+</chrome-i18n>
 
 <style scoped>
 section {

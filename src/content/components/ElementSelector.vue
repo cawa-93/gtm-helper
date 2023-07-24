@@ -45,9 +45,7 @@ useEventListener(document, 'click', handleClick, {
 </script>
 
 <template>
-  <div class="">
-
-  </div>
+  <div class=""></div>
 </template>
 
 <style scoped>
