@@ -15,7 +15,6 @@ export function* getSlice<T extends any>(array: T[], size: number): Generator<T[
         let head = array[i]
         const tail = array.slice(i + 1)
         for (const combElement of getSlice(tail, size - 1)) {
-            // if (size === 3) console.log({size, head, tail, combElement})
             yield [head, ...combElement]
         }
     }
@@ -27,7 +26,6 @@ export function* getSlice<T extends any>(array: T[], size: number): Generator<T[
  * @param array
  */
 export function* getAllCombinations<T extends any>(array: T[]): Generator<T[], void> {
-    console.log({array})
     if (array.length < 2) {
         yield array
         return

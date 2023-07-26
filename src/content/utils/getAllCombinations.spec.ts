@@ -2,7 +2,7 @@ import {expect, test} from '@playwright/test';
 import {getAllCombinations, getSlice} from './getAllCombinations.js'
 
 const array = [1, 2, 3, 4, 5]
-const slices = [
+const dataset = [
     {
         size: 1, slices: [
             [1],
@@ -60,15 +60,15 @@ const slices = [
     },
 ]
 
-test('getAllCombinations', async () => {
-    await expect([...getAllCombinations(array)]).toEqual(slices.flatMap(s => s.slices))
+test('getAllCombinations', () => {
+    expect([...getAllCombinations(array)]).toEqual(dataset.flatMap(s => s.slices))
 });
 
 
-test('getComb', async () => {
-
-    for (const s of slices) {
-        await expect([...getSlice(array, s.size)]).toEqual(s.slices)
+test.describe('getSlice', () => {
+    for (const {size, slices} of dataset) {
+        test(`... size: ${size}`, () => {
+            expect([...getSlice(array, size)]).toEqual(slices)
+        })
     }
-
-})
+});
