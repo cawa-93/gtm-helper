@@ -3,7 +3,7 @@ import {effectScope, onBeforeUnmount, onMounted, onUnmounted, ref} from "vue";
 import {useEventListener} from "@vueuse/core";
 import {useHighlightOnElement} from "./composables/UseHighlightOnElement.js";
 import WidgetWindow from "./components/WidgetWindow.vue";
-import WidgetControls from "./components/WIdgetControls.vue";
+import WidgetControls from "./components/WidgetWindow.vue";
 import WidgetProposals from "./components/WidgetProposals.vue";
 import MessageNonInteractive from "./components/MessageNonInteractive.vue";
 import MessageInForm from "./components/MessageInForm.vue";
