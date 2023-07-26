@@ -20,7 +20,11 @@ jobs:
       - run: pnpm install
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
+
       - run: pnpm run build
+        env:
+          BUILD_TARGET: chrome
+
       - run: pnpm run test
       - uses: actions/upload-artifact@v3
         if: always()
