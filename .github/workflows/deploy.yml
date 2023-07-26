@@ -31,6 +31,7 @@ jobs:
       - run: pnpm run build
         env:
           BUILD_TARGET: chrome
+
       #
       #      - name: Upload to Firefox
       #        uses: yayuyokitano/firefox-addon@v0.0.6-alpha
@@ -39,6 +40,9 @@ jobs:
       #          api_secret: ${{ secrets.FIREFOX_SECRET }}
       #          guid: '{}'
       #          xpi_path: dist/latest.zip
+
+
+      - run: pnpm run web-ext:pack
 
       - name: Upload to Chrome
         uses: mnao305/chrome-extension-upload@v4.0.1
