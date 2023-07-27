@@ -38,7 +38,7 @@ jobs:
         uses: PlasmoHQ/bpp@v3
         with:
           keys: ${{ secrets.BPP_KEYS }}
-          file: dist-packed/latest.zip
+          file: dist-packed/gtm_helper-{version}.zip
           notes: "You can test addon in this video: https://www.youtube.com/watch?v=dLeIhrpQ1Lg"
 
 
