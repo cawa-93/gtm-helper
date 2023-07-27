@@ -42,8 +42,9 @@ jobs:
             ${{ inputs.VERSION_REF || ( github.ref_type == 'tag' && github.ref || '0.0.0') }}
           BUILD_TARGET: chrome
 
+      - run: pnpm run web-ext:pack
       - run: pnpm run test
-        
+
       - uses: actions/upload-artifact@v3
         if: always()
         with:
