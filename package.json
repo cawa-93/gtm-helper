@@ -3,13 +3,13 @@
   "version": "0.0.2",
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch --minify false --mode firefox",
+    "dev": "vite build --watch --minify false --mode chrome",
     "build": "vite build --mode chrome",
     "start:edge": "web-ext run -t chromium --chromium-binary \"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
     "start:firefox": "web-ext run -f --start-url \"https://rozetka.com.ua/ua/\" --source-dir ./dist",
     "preview": "vite preview",
     "test": "npx playwright test",
-    "web-ext:pack": "web-ext build --overwrite-dest -s ./dist -a ./dist-packed -n latest.zip",
+    "web-ext:pack": "web-ext build --overwrite-dest -s ./dist -a ./dist-packed",
     "web-ext:lint": "web-ext lint -s ./dist"
   },
   "dependencies": {

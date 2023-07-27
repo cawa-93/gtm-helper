@@ -32,25 +32,13 @@ jobs:
         env:
           BUILD_TARGET: chrome
 
-      #
-      #      - name: Upload to Firefox
-      #        uses: yayuyokitano/firefox-addon@v0.0.6-alpha
-      #        with:
-      #          api_key: ${{ secrets.FIREFOX_ISSUER }}
-      #          api_secret: ${{ secrets.FIREFOX_SECRET }}
-      #          guid: '{}'
-      #          xpi_path: dist/latest.zip
-
-
       - run: pnpm run web-ext:pack
 
-      - name: Upload to Chrome
-        uses: mnao305/chrome-extension-upload@v4.0.1
+      - name: Browser Platform Publish
+        uses: PlasmoHQ/bpp@v3
         with:
-          file-path: dist-packed/latest.zip
-          extension-id: 'nlacheihkljhpihchfjpmccafnipcana'
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          keys: ${{ secrets.BPP_KEYS }}
+          file: dist-packed/latest.zip
+          notes: "You can test addon in this video: https://www.youtube.com/watch?v=dLeIhrpQ1Lg"
 
 
