@@ -3,15 +3,25 @@
 
 name: Deploy
 
-on: [ workflow_dispatch ]
+on:
+  workflow_dispatch:
+    inputs:
+      VERSION_REF:
+        required: true
+        type: string
+        description: Set app version to deploy in semver format [0-9].[0-9].[0-9]
+  release:
+    types: [ created ]
 
 jobs:
 
   test:
     uses: ./.github/workflows/test.yml
+    with:
+      VERSION_REF: ${{ inputs.VERSION_REF || github.ref }}
 
 
-  deploy-chrome:
+  deploy:
     needs: [ test ]
 
     runs-on: ubuntu-latest
@@ -30,7 +40,11 @@ jobs:
       - run: pnpm install
       - run: pnpm run build
         env:
+          VERSION_REF: ${{ inputs.VERSION_REF || github.ref }}
           BUILD_TARGET: chrome
+
+      - run: cat dist/manifest.json
+      - run: echo ${{ github.ref }}
 
       - run: pnpm run web-ext:pack
 

@@ -4,50 +4,83 @@ import vue from '@vitejs/plugin-vue'
 import {viteVueCESubStyle} from '@unplugin-vue-ce/sub-style'
 import chromeI18nBlock from 'vite-plugin-vue-chrome-i18n'
 
-/**
- * @param {'chrome' | 'edge' | 'firefox'} target
- * @returns {chrome.runtime.Manifest}
- */
-function getManifest(target) {
-
-    const chromeBackground = {
-        service_worker: "src/background/index.ts",
-    }
-
-    const firefoxBackground = {
-        scripts: [
-            'src/background/index.ts'
-        ]
-    }
-
-    return {
-        name: '__MSG_APP_NAME__',
-        description: '__MSG_APP_DESCRIPTION__',
-        version: process.env.npm_package_version,
-        manifest_version: 3,
-        default_locale: 'en',
-        icons: {
-            "128": "icons/128.png"
-        },
-
-
-        action: {},
-
-        permissions: ["activeTab", "scripting"],
-
-        background: target === 'firefox' ? firefoxBackground : chromeBackground,
-    }
-}
 
 export default defineConfig(({mode,}) => {
 
+    /**
+     *
+     * @type {{
+     *     VERSION_REF: string | undefined,
+     *     npm_package_version: string | undefined,
+     *     BUILD_TARGET: 'chrome' | 'edge' | 'firefox' | undefined
+     * }}
+     */
+    const ENV = loadEnv(mode, process.cwd(), '')
 
-    const {BUILD_TARGET, npm_package_version} = loadEnv(mode, process.cwd(), '')
     const supportedBuildTarget = ['chrome', 'edge', 'firefox']
 
-    if (!supportedBuildTarget.includes(BUILD_TARGET)) {
-        throw new Error(`The BUILD_TARGET environment variable is not specified correctly. Valid values are: ${supportedBuildTarget} You have submitted: ${JSON.stringify(BUILD_TARGET)}`)
+    if (!supportedBuildTarget.includes(ENV.BUILD_TARGET)) {
+        throw new Error(`The BUILD_TARGET environment variable is not specified correctly. Valid values are: ${supportedBuildTarget} You have submitted: ${JSON.stringify(ENV.BUILD_TARGET)}`)
     }
+
+
+    function resolveAppVersion() {
+        const {VERSION_REF, npm_package_version} = ENV
+
+
+        let resolvedVersion = ''
+
+        if (VERSION_REF) {
+            const versionFromRef = VERSION_REF.match(/^(?:refs\/tags\/)?v?([0-9]+\.[0-9]+\.[0-9]+)$/)?.[1]
+            if (versionFromRef) {
+                resolvedVersion = versionFromRef
+            } else {
+                throw new Error(`Can not resolve version from VERSION_REF. VERSION_REF is ${JSON.stringify(VERSION_REF)} and resolvedVersion is ${resolvedVersion}`)
+            }
+        } else if (npm_package_version) {
+            resolvedVersion = npm_package_version;
+        }
+
+        if (!resolvedVersion) {
+            throw new Error('Unable to resolve version. You must specify the VERSION_REF environment variable with the semver version or git reference to tag with version or specify the version in the package.json.')
+        }
+
+        return resolvedVersion;
+    }
+
+    /**
+     * @returns {chrome.runtime.Manifest}
+     */
+    function getManifest() {
+
+        const chromeBackground = {
+            service_worker: "src/background/index.ts",
+        }
+
+        const firefoxBackground = {
+            scripts: [
+                'src/background/index.ts'
+            ]
+        }
+
+        const version = resolveAppVersion()
+
+        return {
+            manifest_version: 3,
+            name: '__MSG_APP_NAME__',
+            description: '__MSG_APP_DESCRIPTION__',
+            version,
+            default_locale: 'en',
+            icons: {
+                "128": "icons/128.png"
+            },
+            action: {},
+            permissions: ["activeTab", "scripting"],
+            background:
+                ENV.BUILD_TARGET === 'firefox' ? firefoxBackground : chromeBackground,
+        }
+    }
+
 
     return {
         plugins: [
@@ -79,7 +112,7 @@ export default defineConfig(({mode,}) => {
             }),
             viteVueCESubStyle(),
             webExtension({
-                manifest: getManifest(BUILD_TARGET),
+                manifest: getManifest(),
                 additionalInputs: {
                     scripts: ['src/content/main.ts']
                 }

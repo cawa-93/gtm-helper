@@ -1,6 +1,21 @@
 name: Run tests
 
-on: [ push, pull_request, workflow_dispatch, workflow_call ]
+on:
+  push:
+  pull_request:
+  workflow_call:
+    inputs:
+      VERSION_REF:
+        required: true
+        type: string
+        description: Set app version to deploy in semver format [0-9].[0-9].[0-9]
+  workflow_dispatch:
+    inputs:
+      VERSION_REF:
+        required: false
+        default: 0.0.0
+        type: string
+        description: Set app version to deploy in semver format [0-9].[0-9].[0-9]
 
 jobs:
   test:
@@ -18,14 +33,17 @@ jobs:
           node-version: 18
 
       - run: pnpm install
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+      #      - name: Install Playwright Browsers
+      #        run: pnpm exec playwright install --with-deps
 
       - run: pnpm run build
         env:
+          VERSION_REF:
+            ${{ inputs.VERSION_REF || ( github.ref_type == 'tag' && github.ref || '0.0.0') }}
           BUILD_TARGET: chrome
 
       - run: pnpm run test
+        
       - uses: actions/upload-artifact@v3
         if: always()
         with:
