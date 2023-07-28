@@ -106,6 +106,6 @@ const proposalsDefinitions = computed(() => proposals.value.map((proposal): Defi
 section {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 </style>

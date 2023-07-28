@@ -61,7 +61,7 @@ section {
   background: white;
   width: 100%;
   max-height: 100%;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
   --border-color: #dee2e6;
@@ -70,7 +70,7 @@ section {
 
 header {
   cursor: move;
-  padding: 0.5rem 1rem;
+  padding: 8px 16px;
   border-bottom: 1px solid var(--border-color);
   user-select: none;
   touch-action: none;
@@ -78,12 +78,12 @@ header {
 
 main {
   flex: 1;
-  padding: 1rem;
+  padding: 16px;
   overflow: auto;
 }
 
 footer {
-  padding: 0.5rem 1rem;
+  padding: 8px 16px;
   border-top: 1px solid var(--border-color);
   font-size: 80%;
 }

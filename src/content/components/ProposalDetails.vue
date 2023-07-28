@@ -91,7 +91,7 @@ const icon = computed(() => {
 <style scoped>
 
 details {
-  border-radius: 0.5rem;
+  border-radius: 8px;
   --border-color: #dee2e6;
   border: 1px solid var(--border-color);
 }
@@ -99,10 +99,10 @@ details {
 summary {
   list-style: none;
   cursor: pointer;
-  padding: 1rem;
+  padding: 16px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   font-weight: bold;
 }
 
@@ -112,13 +112,12 @@ summary {
   background: var(--icon-color, #29b6f6);
   border-radius: 50%;
   color: white;
-  /* font-size: 1rem; */
   padding: 3px;
 }
 
 .inner-content {
-  padding-block: 0.5rem;
-  padding-inline-end: 0.5rem;
-  padding-inline-start: calc(24px + 1.5rem);
+  padding-block: 8px;
+  padding-inline-end: 8px;
+  padding-inline-start: calc(24px + 1.5em);
 }
 </style>

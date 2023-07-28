@@ -9,6 +9,7 @@ import MessageNonInteractive from "./components/MessageNonInteractive.vue";
 import MessageInForm from "./components/MessageInForm.vue";
 import MessageFormSubmit from "./components/MessageFormSubmit.vue";
 import WidgetFooter from "./components/WidgetFooter.vue";
+import {getMessage} from 'vite-plugin-vue-chrome-i18n/getMessage.js'
 
 const selected = ref<HTMLElement | null>(null)
 
@@ -77,7 +78,7 @@ const closeApp = () => {
         <MessageInForm v-if="selected" v-model:element="selected"/>
         <MessageNonInteractive v-if="selected" v-model:element="selected"/>
         <WidgetProposals v-if="selected" :element="selected"/>
-        <div v-else>Оберіть елемент на сторінці для аналізу</div>
+        <div v-else>{{ getMessage('select') }}</div>
       </div>
       <template #footer>
         <WidgetFooter/>
@@ -86,8 +87,7 @@ const closeApp = () => {
   </section>
 </template>
 
-<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
-<!-- language=json -->
+
 <chrome-i18n locale="uk">
 {
   "$schema": "https://json.schemastore.org/browser.i18n.json",
@@ -98,9 +98,7 @@ const closeApp = () => {
 </chrome-i18n>
 
 
-<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
-<!-- language=json -->
-<chrome-i18n locale="uk">
+<chrome-i18n locale="en">
 {
   "$schema": "https://json.schemastore.org/browser.i18n.json",
   "select": {
@@ -131,6 +129,6 @@ const closeApp = () => {
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 </style>
