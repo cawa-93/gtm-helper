@@ -1,92 +1,26 @@
 <script lang="ts" setup>
-import {IconEye, IconLink, IconMouse, IconPlaylistCheck} from '@iconify-prerendered/vue-mdi'
-import {ClickLinkProposal} from "../gtm-proposals/ClickLinkProposal.js";
-import {VisibilityProposal} from "../gtm-proposals/VisibilityProposal.js";
-import {FormProposal} from "../gtm-proposals/FormProposal.js";
-import {ClickProposal} from "../gtm-proposals/ClickProposal.js";
-import {computed} from "vue";
-import DefinitionList from "./DefinitionList.vue";
-import {getMessage} from "vite-plugin-vue-chrome-i18n/getMessage.js";
+import {Component} from "vue";
 
-const props = defineProps<{
-  proposal: VisibilityProposal | ClickLinkProposal | ClickProposal | FormProposal
-  definitions: { title: string, value: string }[]
-}>()
-
-const icon = computed(() => {
-  switch (props.proposal.constructor) {
-    case VisibilityProposal :
-      return {color: '#8bc34a', component: IconEye, label: getMessage('element_visibility')}
-    case ClickLinkProposal :
-      return {color: '#29b6f6', component: IconLink, label: getMessage('click_links')}
-    case ClickProposal :
-      return {color: '#29b6f6', component: IconMouse, label: getMessage('click')}
-    case FormProposal :
-      return {color: '#8bc34a', component: IconPlaylistCheck, label: getMessage('form_submission')}
+defineProps<{
+  label: string
+  icon: {
+    color: string
+    component: Component
   }
-})
+}>()
 </script>
 
 <template>
   <details>
     <summary>
       <component :is="icon.component" :style="'--icon-color:' + icon.color" class="icon"></component>
-      {{ icon.label }}
+      {{ label }}
     </summary>
     <div class="inner-content">
-      <DefinitionList :definitions="definitions"/>
+      <slot></slot>
     </div>
   </details>
 </template>
-
-
-<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
-<!-- language=json -->
-<chrome-i18n locale="uk">
-{
-  "$schema": "https://json.schemastore.org/browser.i18n.json",
-  "element_visibility": {
-    "message": "Видимість елемента"
-  },
-  "click_links": {
-    "message": "Клік: лише посилання"
-  },
-  "click": {
-    "message": "Клік: усі елементи"
-  },
-  "form_submission": {
-    "message": "Надсилання форми"
-  },
-  "video": {
-    "message": "Відео YouTube"
-  }
-}
-</chrome-i18n>
-
-
-<!--suppress JsonStandardCompliance, HtmlUnknownTag -->
-<!-- language=json -->
-<chrome-i18n locale="en">
-{
-  "$schema": "https://json.schemastore.org/browser.i18n.json",
-  "element_visibility": {
-    "message": "Element Visibility"
-  },
-  "click_links": {
-    "message": "Click: Just Links"
-  },
-  "click": {
-    "message": "Click: All Elements"
-  },
-  "form_submission": {
-    "message": "Form Submission"
-  },
-  "video": {
-    "message": "YouTube Video"
-  }
-}
-</chrome-i18n>
-
 
 <style scoped>
 
@@ -116,8 +50,7 @@ summary {
 }
 
 .inner-content {
-  padding-block: 8px;
-  padding-inline-end: 8px;
-  padding-inline-start: calc(24px + 1.5em);
+  padding-bottom: 8px;
+  padding-inline: 8px;
 }
 </style>
