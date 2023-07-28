@@ -15,7 +15,7 @@ test('All keys in all localizations must be the same', () => {
 })
 
 
-test.only('Messages do not have to have the same values in different locales', () => {
+test('Messages do not have to have the same values in different locales', () => {
 
     const messagesMap: Record<string, { code: typeof localeCodes[number], value: string }[]> = {}
 
