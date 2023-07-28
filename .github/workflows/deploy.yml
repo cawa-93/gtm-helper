@@ -50,6 +50,5 @@ jobs:
         with:
           keys: ${{ secrets.BPP_KEYS }}
           file: dist-packed/chrome.zip
-          notes: "You can test addon in this video: https://www.youtube.com/watch?v=dLeIhrpQ1Lg"
 
 
