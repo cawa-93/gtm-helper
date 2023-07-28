@@ -43,16 +43,13 @@ jobs:
           VERSION_REF: ${{ inputs.VERSION_REF || github.ref }}
           BUILD_TARGET: chrome
 
-      - run: cat dist/manifest.json
-      - run: echo ${{ github.ref }}
-
-      - run: pnpm run web-ext:pack
+      - run: pnpm run web-ext:pack -n chrome.zip
 
       - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
         with:
           keys: ${{ secrets.BPP_KEYS }}
-          file: dist-packed/gtm_helper-{version}.zip
+          file: dist-packed/chrome.zip
           notes: "You can test addon in this video: https://www.youtube.com/watch?v=dLeIhrpQ1Lg"
 
 
