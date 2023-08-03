@@ -19,4 +19,5 @@ targeting the selected element.
 ## Download and review
 
 - [Chrome and chrome-like](https://chrome.google.com/webstore/detail/gtm-helper/nlacheihkljhpihchfjpmccafnipcana)
+- [Edge](https://microsoftedge.microsoft.com/addons/detail/gtm-%D0%BF%D0%BE%D0%BC%D1%96%D1%87%D0%BD%D0%B8%D0%BA/ocgkiiminhhnooafdahalfbkhmfgfpog). Or use Chrome version above 👆.
 - Firefox: TBA
