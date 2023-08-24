@@ -29,6 +29,9 @@ defineProps<{
 <chrome-i18n locale="uk">
 {
   "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "label": {
+    "message": "Видимість елемента"
+  },
   "selection_method": {
     "message": "Спосіб вибору",
     "description": "Тексти з налаштувань тригера «Видимість елемента»"
@@ -48,6 +51,9 @@ defineProps<{
 <chrome-i18n locale="en">
 {
   "$schema": "https://json.schemastore.org/browser.i18n.json",
+  "label": {
+    "message": "Element visibility"
+  },
   "selection_method": {
     "message": "Selection Method",
     "description": "Texts from the «Element visibility» trigger settings"
