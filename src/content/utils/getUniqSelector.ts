@@ -14,7 +14,7 @@ function getSelectorByNthChild(element: HTMLElement) {
 
 
 function filterBlockedAttributes(attr: Attr) {
-    return !['id', 'class', 'style'].includes(attr.name) && !['data-', 'aria-', 'on'].some(s => attr.name.startsWith(s))
+    return !['id', 'class', 'style'].includes(attr.name) && !['on'].some(s => attr.name.startsWith(s))
 }
 
 function getElementSelectorParts(element: HTMLElement) {
@@ -44,25 +44,29 @@ function getTagName(element: HTMLElement): string {
     return element.tagName.toLowerCase()
 }
 
-function getShortestElementSelector(element: HTMLElement, childSelector = '', maxElementsOnPage = 1) {
+function getShortestElementSelector(element: HTMLElement, childSelector = '', maxElementsOnPage = 1, blockWordsList = [] as string[]) {
     const {id, classes, attributes, nthChild} = getElementSelectorParts(element)
     if (id) {
         return `#${id} ${childSelector}`
     }
 
-    const nthChildIfNeeded = element.parentElement?.childElementCount > 1 ? nthChild : ''
+    const filteredClasses = classes.filter(c => !blockWordsList.some(b => c.includes(b)))
+
+    console.log({id, classes, attributes, nthChild})
+
+    const nthChildIfNeeded = (element.parentElement?.childElementCount || 0) > 1 ? nthChild : ''
 
 
-    const fullSelector = getTagName(element) + mergeClasses(classes) + mergeAttributes(attributes) + nthChildIfNeeded + ` ${childSelector}`
+    const fullSelector = getTagName(element) + mergeClasses(filteredClasses) + mergeAttributes(attributes) + nthChildIfNeeded + ` ${childSelector}`
     if (!isEnoughUniq(fullSelector, maxElementsOnPage)) {
         return fullSelector
     }
 
 
-    for (const tagNameVariant of ['', getTagName(element)]) {
-        for (const childPseudoSelectorVariant of [...new Set(['', nthChildIfNeeded])]) {
+    for (const childPseudoSelectorVariant of [...new Set(['', nthChildIfNeeded])]) {
+        for (const tagNameVariant of ['', getTagName(element)]) {
             for (const attributesCombination of attributes.length ? [[''], ...getAllCombinations([...new Set(attributes)])] : [['']]) {
-                for (const classesCombination of classes.length ? [[''], ...getAllCombinations([...new Set(classes)])] : [['']]) {
+                for (const classesCombination of filteredClasses.length ? [[''], ...getAllCombinations([...new Set(filteredClasses)])] : [['']]) {
                     const selector = tagNameVariant + mergeClasses(classesCombination) + mergeAttributes(attributesCombination) + childPseudoSelectorVariant + ` ${childSelector}`
                     if (!selector.trim() || selector.trim().startsWith('>')) {
                         continue
@@ -79,17 +83,20 @@ function getShortestElementSelector(element: HTMLElement, childSelector = '', ma
 }
 
 export function getUniqSelector(element: HTMLElement, {maxElementsOnPage = 1, requireTagName = false} = {}): string {
+
+    const blockWordsList = ['active', 'hover', 'selected']
+
     let selector = ''
-    let elementToWork = element
+    let elementToWork: HTMLElement | null = element
     do {
-        selector = getShortestElementSelector(elementToWork, selector ? `> ${selector}` : '', maxElementsOnPage);
-        // console.log({selector, isEnoughUniq: isEnoughUniq(selector, maxElementsOnPage)})
+        selector = getShortestElementSelector(elementToWork, selector ? `> ${selector}` : '', maxElementsOnPage, blockWordsList);
         elementToWork = elementToWork.parentElement
     } while (!isEnoughUniq(selector, maxElementsOnPage) && elementToWork)
 
     if (requireTagName) {
         selector = selector.replace(/(>\s*)(?=[.:#\[][^>]*$)/, getTagName(element))
     }
+
 
     return selector
 }
